@@ -2,14 +2,11 @@
 use eframe::egui;
 use egui::{FontData, FontFamily, FontDefinitions};
 
-const FONT_KEY: &str = "my_font";
-//create a string array of runes
-const YOUNGER_FUTHARK: [&str; 16] = ["ᚠ","ᚢ","ᚦ", "ᚬ", "ᚱ", "ᚴ", "ᚼ", "ᚾ", "ᛁ", "ᛅ", "ᛋ", "ᛏ", "ᛒ", "ᛘ", "ᛚ", "ᛦ"];
-const LATIN_REP: [&str; 16] = ["f", "u", "þ", "ą", "r", "k", "h", "n", "i", "a", "s", "t", "b", "m", "I", "R"];
+const FONT_KEY: &str = "Historic";
 
 fn load_compatible_font () -> FontDefinitions {
     let mut fonts = FontDefinitions::default();
-    // Install font to  support non-latin characters:
+    // Install font to support non-latin characters:
     fonts.font_data.insert(FONT_KEY.to_owned(),
     FontData::from_static(include_bytes!("../fonts/segoe ui historic.ttf"))); // .ttf and .otf supported
 
@@ -25,21 +22,14 @@ fn load_compatible_font () -> FontDefinitions {
 
 #[derive(Default)]
 pub struct AppState {
-    latin_string: String,
-    younger_futhark_string: String
+    pub younger_futhark_characters: Vec<String>,
+    pub latin_string: String,
+    runic_string: String
 }
 
 impl AppState {
     pub fn new(cc: &eframe::CreationContext<'_>) -> Self {
-        // Customize egui here with cc.egui_ctx.set_fonts and cc.egui_ctx.set_visuals.
-        // Restore app state using cc.storage (requires the "persistence" feature).
-        // Use the cc.gl (a glow::Context) to create graphics shaders and buffers that you can use
-        // for e.g. egui::PaintCallback.
-
-        // load font definition from File
-
         let fonts =  load_compatible_font();
-
         cc.egui_ctx.set_fonts(fonts);
         Self::default()
     }
@@ -51,25 +41,25 @@ impl eframe::App for AppState {
        egui::CentralPanel::default().show(ctx, |ui| {
     
         ui.heading(self.latin_string.as_str());
-        ui.heading(self.younger_futhark_string.as_str());
+        ui.heading(self.runic_string.as_str());
 
         ui.horizontal(|ui| {
             ui.label("Latin string:");
             ui.text_edit_singleline(&mut self.latin_string);
         });
         ui.horizontal(|ui| {
-            ui.label("Younger Futhark string:");
-            ui.text_edit_singleline(&mut self.younger_futhark_string);
+            ui.label("Runic string:");
+            ui.text_edit_singleline(&mut self.runic_string);
         });
 
         ui.horizontal(|ui| {
             // for each rune in RUNES
-            for rune in YOUNGER_FUTHARK.iter() {
+            for rune in self.younger_futhark_characters.iter() {
                 // create a button
-                if ui.button(*rune).clicked() {
+                if ui.button(rune).clicked() {
                     // add character to younger_futhark_string
-                    self.younger_futhark_string.push_str(rune);
-                    self.latin_string.push_str(LATIN_REP[YOUNGER_FUTHARK.iter().position(|&r| r == *rune).unwrap()]);
+                    self.runic_string.push_str(rune);
+                  
                 }
             }
         });
