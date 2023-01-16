@@ -5,7 +5,7 @@ CREATE TABLE futhark (
 
 CREATE TABLE rune (
     id SERIAL PRIMARY KEY,
-    rune VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
     latin VARCHAR(255) NOT NULL,
     futhark INT NOT NULL,
     CONSTRAINT futhark_id FOREIGN KEY (futhark) REFERENCES futhark(id)

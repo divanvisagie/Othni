@@ -10,7 +10,7 @@ diesel::table! {
 diesel::table! {
     rune (id) {
         id -> Int4,
-        rune -> Varchar,
+        name -> Varchar,
         latin -> Varchar,
         futhark -> Int4,
     }
