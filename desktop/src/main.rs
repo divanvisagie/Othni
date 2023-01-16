@@ -5,7 +5,7 @@ use serde::Deserialize;
 
 use crate::app::AppState;
 
-const YOUNGER_FUTHARK: &'static [u8] = include_bytes!("../data/younger_futhark.csv");
+const YOUNGER_FUTHARK: &'static [u8] = include_bytes!("../../data/younger_futhark.csv");
 
 #[derive(Debug, Deserialize)]
 struct RunePair {
