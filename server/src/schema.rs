@@ -12,11 +12,11 @@ diesel::table! {
         id -> Int4,
         name -> Varchar,
         latin -> Varchar,
-        futhark -> Int4,
+        futhark_id -> Int4,
     }
 }
 
-diesel::joinable!(rune -> futhark (futhark));
+diesel::joinable!(rune -> futhark (futhark_id));
 
 diesel::allow_tables_to_appear_in_same_query!(
     futhark,

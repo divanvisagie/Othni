@@ -3,6 +3,7 @@ use tracing_actix_web::TracingLogger;
 
 use handlers::ping::get_ping;
 use handlers::futhark::{get_futharks, post_futhark};
+use handlers::rune::{get_runes, post_rune};
 
 mod handlers;
 mod clients;
@@ -26,6 +27,8 @@ async fn main() -> std::io::Result<()> {
         .route("/ping/{name}", web::get().to(get_ping))	
         .route("/futharks", web::get().to(get_futharks))
         .route("/futhark", web::post().to(post_futhark))
+        .route("/runes", web::get().to(get_runes))
+        .route("/rune", web::post().to(post_rune))
     });
 
 

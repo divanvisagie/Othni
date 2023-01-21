@@ -22,7 +22,7 @@ pub struct NewFuthark<'a> {
 
 
 pub struct FutharkRepository<'a> {
-  connection: &'a mut PgConnection
+    connection: &'a mut PgConnection
 }
 
 

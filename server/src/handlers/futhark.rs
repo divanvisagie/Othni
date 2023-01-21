@@ -1,8 +1,8 @@
-use crate::{clients::db};
-use crate::repos::futhark::{FutharkRepository, NewFuthark};
 use actix_web::web::Bytes;
 use actix_web::{HttpResponse, HttpRequest};
 
+use crate::{clients::db};
+use crate::repos::futhark::{FutharkRepository, NewFuthark};
 
 pub async fn get_futharks() -> HttpResponse {
 
